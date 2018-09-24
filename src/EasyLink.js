@@ -3,9 +3,9 @@ const axios = require('axios')
 class EasyLink {
   /**
    * Fcking constructor.
-   * 
-   * @param {string} host 
-   * @param {string} serialNumber 
+   *
+   * @param {string} host
+   * @param {string} serialNumber
    */
   constructor ({ host, serialNumber }) {
     this.host = host
@@ -20,15 +20,15 @@ class EasyLink {
 
   /**
    * Generate payload string.
-   * 
-   * @param {object} payload 
+   *
+   * @param {object} payload
    */
   generatePayload (payload) {
     const payloadKeys = Object.keys(payload)
     let payloadString = '?'
 
     payloadKeys.forEach((item, index) => {
-      if (typeof payload[item] === 'object' || typeof payload[item] === 'array') {
+      if (typeof payload[item] === 'object' || Array.isArray(payload[item])) {
         payloadString += `${item}=${JSON.stringify(payload[item])}`
       } else {
         payloadString += `${item}=${payload[item]}`
@@ -42,7 +42,7 @@ class EasyLink {
 
   /**
    * Get device info.
-   * 
+   *
    * @return {object}
    */
   async getDeviceInfo () {
@@ -63,7 +63,7 @@ class EasyLink {
 
   /**
    * Get all users.
-   * 
+   *
    * @return {array}
    */
   async getAllUsers () {
@@ -76,7 +76,7 @@ class EasyLink {
         throw new Error('Get all users request failed')
       }
 
-      return typeof res.data.Data === 'array' ? res.data.Data : []
+      return Array.isArray(res.data.Data) ? res.data.Data : []
     } catch (err) {
       throw err
     }
@@ -84,7 +84,7 @@ class EasyLink {
 
   /**
    * Upload a user.
-   * 
+   *
    * @param {object} data
    */
   async uploadUser (data) {
