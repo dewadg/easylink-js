@@ -1,3 +1,3 @@
-const EasyLink = require('./lib')
+const EasyLink = require('./lib/src').EasyLink
 
 module.exports = EasyLink
