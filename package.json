@@ -9,7 +9,6 @@
   "private": false,
   "scripts": {
     "test": "ts-mocha -p tsconfig.json test/**/*.ts",
-    "build": "babel src -d lib",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
