@@ -1,4 +1,4 @@
-const axios = require('axios')
+import axios from 'axios'
 
 class EasyLink {
   /**
@@ -254,4 +254,4 @@ class EasyLink {
   }
 }
 
-module.exports = EasyLink
+export default EasyLink
