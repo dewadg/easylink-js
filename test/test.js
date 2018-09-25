@@ -41,6 +41,12 @@ describe('easylink-js Tests', () => {
       assert.equal(payloadString, '?host=http://localhost:7005&serialNumber=616430016400193')
     })
 
+    it('should initializes device successfully', () => {
+      assert.doesNotThrow(async () => {
+        await easyLink.init()
+      })
+    })
+
     it('should returns device info', async () => {
       const deviceInfo = await easyLink.getDeviceInfo()
 
@@ -64,15 +70,45 @@ describe('easylink-js Tests', () => {
       assert.isArray(users)
     })
 
-    it('should uploads a user successfully', async () => {
+    it('should uploads a user successfully', () => {
       assert.doesNotThrow(async () => {
         await generateUser(easyLink)
       })
     })
 
-    it('should deletes all user on machine', async () => {
+    it('should deletes all users on machine', () => {
       assert.doesNotThrow(async () => {
         await easyLink.deleteAllUsers()
+      })
+    })
+
+    it('should fetches all scan logs successfully', async () => {
+      const scanLogs = await easyLink.getAllScanLogs()
+
+      assert.isArray(scanLogs)
+    })
+
+    it('should fetches new scan logs successfully', async () => {
+      const scanLogs = await easyLink.getNewScanLogs()
+
+      assert.isArray(scanLogs)
+    })
+
+    it('should deletes scan logs successfully', () => {
+      assert.doesNotThrow(async () => {
+        await easyLink.deleteAllScanLogs()
+      })
+    })
+
+    it('should syncs date/time successfully', () => {
+      assert.doesNotThrow(async () => {
+        await easyLink.syncDateTime()
+      })
+    })
+
+    it('should deletes device logs successfully', () => {
+      assert.doesNotThrow(async () => {
+        await easyLink.deleteDeviceLogs()
       })
     })
   })

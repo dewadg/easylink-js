@@ -120,6 +120,138 @@ class EasyLink {
       throw err
     }
   }
+
+  /**
+   * Delete user by PIN.
+   * 
+   * @param {string} pin
+   */
+  async deleteUser (pin) {
+    try {
+      const payload = this.generatePayload({
+        sn: this.serialNumber,
+        pin
+      })
+      const url = `/user/del${payload}`
+      const res = await this.axios.post(url)
+
+      if (!res.data.Result) {
+        throw new Error('Delete a user request failed')
+      }
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Get all scan logs.
+   *
+   * @return {array}
+   */
+  async getAllScanLogs () {
+    try {
+      const payload = this.generatePayload({ sn: this.serialNumber })
+      const url = `/scanlog/all${payload}`
+      const res = await this.axios.post(url)
+
+      if (!res.Result && typeof res.data.message !== 'string') {
+        throw new Error('Get all scanlogs request failed')
+      }
+
+      return Array.isArray(res.data.Data) ? res.data.Data : []
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Get new scan logs.
+   *
+   * @return {array}
+   */
+  async getNewScanLogs() {
+    try {
+      const payload = this.generatePayload({ sn: this.serialNumber })
+      const url = `/scanlog/new${payload}`
+      const res = await this.axios.post(url)
+
+      if (!res.Result && typeof res.data.message !== 'string') {
+        throw new Error('Get all scanlogs request failed')
+      }
+
+      return Array.isArray(res.data.Data) ? res.data.Data : []
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Delete all scan logs.
+   */
+  async deleteAllScanLogs () {
+    try {
+      const payload = this.generatePayload({ sn: this.serialNumber })
+      const url = `/scanlog/del${payload}`
+      const res = await this.axios.post(url)
+
+      if (!res.data.Result) {
+        throw new Error('Delete all scan logs request failed')
+      }
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Sync date time.
+   */
+  async syncDateTime () {
+    try {
+      const payload = this.generatePayload({ sn: this.serialNumber })
+      const url = `/dev/settime${payload}`
+      const res = await this.axios.post(url)
+
+      if (!res.data.Result) {
+        throw new Error('Date/time sync request failed')
+      }
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Delete device logs.
+   */
+  async deleteDeviceLogs () {
+    try {
+      const payload = this.generatePayload({ sn: this.serialNumber })
+      const url = `/log/del${payload}`
+      const res = await this.axios.post(url)
+
+      if (!res.data.Result) {
+        throw new Error('Delete device logs request failed')
+      }
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Initialize the device.
+   */
+  async init () {
+    try {
+      const payload = this.generatePayload({ sn: this.serialNumber })
+      const url = `/dev/init${payload}`
+      const res = await this.axios.post(url)
+
+      if (!res.data.Result) {
+        throw new Error('Init device request failed')
+      }
+    } catch (err) {
+      throw err
+    }
+  }
 }
 
 module.exports = EasyLink
