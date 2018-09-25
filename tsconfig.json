@@ -3,12 +3,14 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "lib",
+    "target": "es5",
     "types": [
       "node",
       "mocha",
       "chai"
     ],
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "removeComments": true
   },
   "include": [
     "src/*.ts",
